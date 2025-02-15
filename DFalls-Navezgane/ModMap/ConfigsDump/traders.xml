@@ -1,0 +1,1716 @@
+﻿<traders buy_markup="3.5" sell_markdown="0.2" quality_mod="1,3" currency_item="casinoCoin" quest_tier_mod="0,0.05,0.1,0.15,0.2,0.25,0.3" currency_randomizer_offset_max="25000">
+  <!--Attribute "currency_randomizer_offset_max" added/overwritten by: "IDCTraderOverhaul"-->
+  <!--Attribute "quality_mod" replaced by: "DarknessFallsCore"-->
+  <!--Attribute "buy_markup" replaced by: "DarknessFallsCore"-->
+  <!-- Table_of_Contents -->
+  <!-- Search_Find_All_for *** -->
+  <!-- *** NOTES: -->
+  <!-- When adding items or blocks to the list, check if they have an "EconomicValue". -->
+  <!-- Most world-decoration blocks like "cntSuitcase" or "airConditioner" do not have values set. -->
+  <!-- quality_mod: Adjusts the price range of all items with a quality level. -->
+  <!-- Price of QL 1 item = item.EconomicValue * traders.quality_mod(low) -->
+  <!-- Price of QL 6 item = item.EconomicValue * traders.quality_mod(high) -->
+  <!-- unique_only="true" : Rolls unique items. Can be applied to the node or element level. -->
+  <!-- Trader Stage: Player Level * ( 1 + quest_tier_mod) -->
+  <!-- quest_tier_mod: Adjusts the trader stage based on the quest tier the player is on at that particular trader location -->
+  <!-- perkDaringAdventurer can also boost Trader Stage -->
+  <!-- *** TRADER_STAGE_TEMPLATES -->
+  <!-- traderstage_template: Sets the min and/or max trader stage using the template that is assigned to each item/block in items.xml/blocks.xml -->
+  <traderstage_templates>
+    <traderstage_template name="baseTier0">
+      <!-- Stone Tools|Pipe Weapons|Utility Tools -->
+      <entry min="1" max="999999" quality="0" />
+      <!-- Fallback for items without quality -->
+      <entry min="999999" max="999999" quality="1" />
+      <!-- Don't show Q1 items -->
+      <entry min="1" max="10" quality="2" />
+      <entry min="5" max="15" quality="3" />
+      <entry min="10" max="20" quality="4" />
+      <entry min="15" max="20" quality="5" />
+    </traderstage_template>
+    <traderstage_template name="baseTier1">
+      <!-- Iron Tools|T1 Weapons|T1 Explosives -->
+      <entry min="1" max="999999" quality="0" />
+      <!-- Fallback for items without quality -->
+      <entry min="15" max="40" quality="1" />
+      <entry min="30" max="50" quality="2" />
+      <entry min="40" max="60" quality="3" />
+      <entry min="50" max="70" quality="4" />
+      <entry min="60" max="70" quality="5" />
+    </traderstage_template>
+    <traderstage_template name="baseTier2">
+      <!-- Steel Tools|T2 Weapons|T2 Explosives -->
+      <entry min="1" max="999999" quality="0" />
+      <!-- Fallback for items without quality -->
+      <entry min="50" max="999999" quality="1" />
+      <entry min="50" max="999999" quality="2" />
+      <entry min="50" max="999999" quality="3" />
+      <entry min="50" max="999999" quality="4" />
+      <entry min="50" max="999999" quality="5" />
+    </traderstage_template>
+    <traderstage_template name="baseTier3">
+      <!-- Mech Tools|T3 Weapons -->
+      <entry min="1" max="999999" quality="0" />
+      <!-- Fallback for items without quality -->
+      <entry min="100" max="999999" quality="1" />
+      <entry min="100" max="999999" quality="2" />
+      <entry min="100" max="999999" quality="3" />
+      <entry min="100" max="999999" quality="4" />
+      <entry min="100" max="999999" quality="5" />
+    </traderstage_template>
+    <!-- Custom 10,20,30-->
+    <traderstage_template name="midTier0">
+      <!-- Forge|Dew Gatherer -->
+      <entry min="10" max="999999" quality="0" />
+    </traderstage_template>
+    <traderstage_template name="midTier1">
+      <!-- Workbench|Mixer|Concrete Mix|Vending Machine|Dew Tarp -->
+      <entry min="20" max="999999" quality="0" />
+    </traderstage_template>
+    <traderstage_template name="midTier2">
+      <!-- Chem Station|Dew Filter -->
+      <entry min="30" max="999999" quality="0" />
+    </traderstage_template>
+    <!-- 100/3 -->
+    <traderstage_template name="ammoTier1">
+      <!-- Brass|Buckshot|Darts -->
+      <entry min="1" max="999999" quality="0" />
+    </traderstage_template>
+    <traderstage_template name="ammoTier2">
+      <!-- HP|Slug|HE -->
+      <entry min="25" max="999999" quality="0" />
+    </traderstage_template>
+    <traderstage_template name="ammoTier3">
+      <!-- AP|Breach|Frag -->
+      <entry min="55" max="999999" quality="0" />
+    </traderstage_template>
+    <!-- 75/5 -->
+    <traderstage_template name="arrowsTier0">
+      <!-- Stone -->
+      <entry min="1" max="999999" quality="0" />
+    </traderstage_template>
+    <traderstage_template name="arrowsTier1">
+      <!-- Iron -->
+      <entry min="10" max="999999" quality="0" />
+    </traderstage_template>
+    <traderstage_template name="arrowsTier2">
+      <!-- Steel -->
+      <entry min="25" max="999999" quality="0" />
+    </traderstage_template>
+    <traderstage_template name="arrowsTier3">
+      <!-- Flaming -->
+      <entry min="40" max="999999" quality="0" />
+    </traderstage_template>
+    <traderstage_template name="arrowsTier4">
+      <!-- Explosive -->
+      <entry min="55" max="999999" quality="0" />
+    </traderstage_template>
+    <!-- 75/4 -->
+    <traderstage_template name="bowsTier0">
+      <!-- Primitive Bow -->
+      <entry min="999999" max="999999" quality="1" />
+      <!-- Don't show Q1 items -->
+      <entry min="1" max="10" quality="2" />
+      <entry min="5" max="15" quality="3" />
+      <entry min="10" max="25" quality="4" />
+      <entry min="15" max="25" quality="5" />
+    </traderstage_template>
+    <traderstage_template name="bowsTier1">
+      <!-- Wooden Bow -->
+      <entry min="15" max="25" quality="1" />
+      <entry min="20" max="30" quality="2" />
+      <entry min="25" max="35" quality="3" />
+      <entry min="30" max="40" quality="4" />
+      <entry min="35" max="50" quality="5" />
+    </traderstage_template>
+    <traderstage_template name="bowsTier2">
+      <!-- Compound Bow, Iron Crossbow -->
+      <entry min="30" max="50" quality="1" />
+      <entry min="40" max="60" quality="2" />
+      <entry min="50" max="70" quality="3" />
+      <entry min="60" max="999999" quality="4" />
+      <entry min="70" max="999999" quality="5" />
+    </traderstage_template>
+    <traderstage_template name="bowsTier3">
+      <!-- Compound Crossbow -->
+      <entry min="50" max="70" quality="1" />
+      <entry min="60" max="80" quality="2" />
+      <entry min="70" max="90" quality="3" />
+      <entry min="80" max="999999" quality="4" />
+      <entry min="90" max="999999" quality="5" />
+    </traderstage_template>
+    <!-- 100/3 -->
+    <traderstage_template name="modsTier1">
+      <entry min="1" max="999999" quality="0" />
+    </traderstage_template>
+    <traderstage_template name="modsTier2">
+      <entry min="25" max="999999" quality="0" />
+    </traderstage_template>
+    <traderstage_template name="modsTier3">
+      <entry min="55" max="999999" quality="0" />
+    </traderstage_template>
+    <!-- 100/3 -->
+    <traderstage_template name="electricTier1">
+      <entry min="1" max="999999" quality="0" />
+    </traderstage_template>
+    <traderstage_template name="electricTier2">
+      <entry min="25" max="999999" quality="0" />
+    </traderstage_template>
+    <traderstage_template name="electricTier3">
+      <!-- Solar Bank|Solar Cells|Blade Trap|Auto Turret -->
+      <entry min="55" max="999999" quality="0" />
+      <entry min="45" max="999999" quality="1" />
+      <entry min="55" max="999999" quality="2" />
+      <entry min="65" max="999999" quality="3" />
+      <entry min="75" max="999999" quality="4" />
+      <entry min="85" max="999999" quality="5" />
+      <entry min="95" max="999999" quality="6" />
+    </traderstage_template>
+    <!-- 300/6 -->
+    <traderstage_template name="vehicleTier0">
+      <!-- Bicycle Parts -->
+      <entry min="1" max="50" quality="0" />
+    </traderstage_template>
+    <traderstage_template name="vehicleTier1">
+      <!-- Bicycle Full - Minibike Parts -->
+      <entry min="25" max="75" quality="0" />
+    </traderstage_template>
+    <traderstage_template name="vehicleTier2">
+      <!-- Minibike Full - Motorcycle Parts -->
+      <entry min="50" max="100" quality="0" />
+    </traderstage_template>
+    <traderstage_template name="vehicleTier3">
+      <!-- Motorcycle Full - 4x4 Parts -->
+      <entry min="75" max="999999" quality="0" />
+    </traderstage_template>
+    <traderstage_template name="vehicleTier4">
+      <!-- 4x4 Full - Gyro Parts -->
+      <entry min="100" max="999999" quality="0" />
+    </traderstage_template>
+    <traderstage_template name="vehicleTier5">
+      <!-- Gyro Full -->
+      <entry min="150" max="999999" quality="0" />
+    </traderstage_template>
+    <traderstage_template name="armorTier1">
+      <!--Element contents replaced by: "DarknessFallsCore"-->
+      <entry min="999999" max="999999" quality="1" />
+      <!-- Don't show Q1 items -->
+      <entry min="1" max="10" quality="2" />
+      <entry min="5" max="15" quality="3" />
+      <entry min="10" max="25" quality="4" />
+      <entry min="15" max="25" quality="5" />
+    </traderstage_template>
+    <traderstage_template name="armorTier2">
+      <!--Element inserted by: "DarknessFallsCore"-->
+      <!-- Leather,Iron -->
+      <entry min="999999" max="999999" quality="1" />
+      <!-- Don't show Q1 items -->
+      <entry min="40" max="60" quality="2" />
+      <entry min="50" max="70" quality="3" />
+      <entry min="60" max="999999" quality="4" />
+      <entry min="70" max="999999" quality="5" />
+    </traderstage_template>
+    <traderstage_template name="armorTier3">
+      <!--Element inserted by: "DarknessFallsCore"-->
+      <!-- Military,Steel -->
+      <entry min="999999" max="999999" quality="1" />
+      <!-- Don't show Q1 items -->
+      <entry min="60" max="80" quality="2" />
+      <entry min="70" max="90" quality="3" />
+      <entry min="80" max="999999" quality="4" />
+      <entry min="90" max="999999" quality="5" />
+    </traderstage_template>
+  </traderstage_templates>
+  <!-- *** TRADER_ITEM_GROUPS -->
+  <trader_item_groups>
+    <!-- *** MELEE_WEAPONS -->
+    <trader_item_group name="groupArmorT0Light">
+      <!--Element inserted by: "DarknessFallsCore"-->
+      <item name="armorPaddedHelmet" quality="10,30" />
+      <item name="armorPaddedOutfit" quality="10,30" />
+      <item name="armorPaddedGloves" quality="10,30" />
+      <item name="armorPaddedBoots" quality="10,30" />
+    </trader_item_group>
+    <trader_item_group name="groupArmorT1Light">
+      <!--Element inserted by: "DarknessFallsCore"-->
+      <item name="armorLeatherHelmet" quality="20,40" />
+      <item name="armorLeatherOutfit" quality="20,40" />
+      <item name="armorLeatherGloves" quality="20,40" />
+      <item name="armorLeatherBoots" quality="20,40" />
+    </trader_item_group>
+    <trader_item_group name="groupArmorT2Light">
+      <!--Element inserted by: "DarknessFallsCore"-->
+      <item name="armorMilitaryHelmet" quality="30,50" />
+      <item name="armorMilitaryOutfit" quality="30,50" />
+      <item name="armorMilitaryGloves" quality="30,50" />
+      <item name="armorMilitaryBoots" quality="30,50" />
+      <item name="modArmorNightVision" />
+    </trader_item_group>
+    <trader_item_group name="groupArmorT0Heavy">
+      <!--Element inserted by: "DarknessFallsCore"-->
+      <item name="armorScrapHelmet" quality="10,30" />
+      <item name="armorScrapOutfit" quality="10,30" />
+      <item name="armorScrapGloves" quality="10,30" />
+      <item name="armorScrapBoots" quality="10,30" />
+    </trader_item_group>
+    <trader_item_group name="groupArmorT1Heavy">
+      <!--Element inserted by: "DarknessFallsCore"-->
+      <item name="armorIronHelmet" quality="20,40" />
+      <item name="armorIronOutfit" quality="20,40" />
+      <item name="armorIronGloves" quality="20,40" />
+      <item name="armorIronBoots" quality="20,40" />
+    </trader_item_group>
+    <trader_item_group name="groupArmorT2Heavy">
+      <!--Element inserted by: "DarknessFallsCore"-->
+      <item name="armorSteelHelmet" quality="30,50" />
+      <item name="armorSteelOutfit" quality="30,50" />
+      <item name="armorSteelGloves" quality="30,50" />
+      <item name="armorSteelBoots" quality="30,50" />
+    </trader_item_group>
+    <trader_item_group name="groupArmorAllLight">
+      <!--Element inserted by: "DarknessFallsCore"-->
+      <item group="groupArmorT0Light" />
+      <item group="groupArmorT1Light" />
+      <item group="groupArmorT2Light" />
+    </trader_item_group>
+    <trader_item_group name="groupArmorAllHeavy">
+      <!--Element inserted by: "DarknessFallsCore"-->
+      <item group="groupArmorT0Heavy" />
+      <item group="groupArmorT1Heavy" />
+      <item group="groupArmorT2Heavy" />
+    </trader_item_group>
+    <trader_item_group name="groupMeleeAll">
+      <!--Element contents replaced by: "DarknessFallsCore"-->
+      <!-- *** Melee_T1 -->
+      <item name="DFmeleeToolMacheteScrap" quality="10,30" />
+      <item name="DFmeleeWpnClubScrap" quality="10,30" />
+      <item name="DFmeleeWpnSpearScrap" quality="10,30" />
+      <item name="DFmeleeWpnKnucklesScrap" quality="10,30" />
+      <!-- *** Melee_T2 -->
+      <item name="meleeWpnBladeT1HuntingKnife" quality="20,40" />
+      <item name="meleeWpnClubT1BaseballBat" quality="20,40" />
+      <item name="meleeWpnSpearT1IronSpear" quality="20,40" />
+      <item name="meleeWpnSledgeT1IronSledgehammer" quality="20,40" />
+      <item name="meleeWpnKnucklesT1IronKnuckles" quality="20,40" />
+      <item name="meleeWpnBatonT2StunBaton" quality="20,40" />
+      <!-- *** Melee_T3 -->
+      <item name="meleeWpnBladeT3Machete" quality="30,50" />
+      <item name="meleeWpnClubT3SteelClub" quality="30,50" />
+      <item name="meleeWpnSpearT3SteelSpear" quality="30,50" />
+      <item name="meleeWpnSledgeT3SteelSledgehammer" quality="30,50" />
+      <item name="meleeWpnKnucklesT3SteelKnuckles" quality="30,50" />
+    </trader_item_group>
+    <!-- *** RANGED_WEAPONS -->
+    <trader_item_group name="groupRangedAll">
+      <!--Element contents replaced by: "DarknessFallsCore"-->
+      <!-- *** Ranged_Weapons_T0 -->
+      <item name="gunBowT0PrimitiveBow" quality="10,30" />
+      <item name="gunHandgunT0PipePistol" quality="10,30" />
+      <item name="gunShotgunT0PipeShotgun" quality="10,30" />
+      <item name="gunRifleT0PipeRifle" quality="10,30" />
+      <item name="gunMGT0PipeMachineGun" quality="10,30" />
+      <!-- *** Ranged_Weapons_T1 -->
+      <item name="gunBowT1WoodenBow" quality="10,30" />
+      <item name="gunHandgunT1Pistol" quality="10,30" />
+      <item name="gunShotgunT1DoubleBarrel" quality="10,30" />
+      <item name="gunRifleT1HuntingRifle" quality="10,30" />
+      <item name="gunMGT1AK47" quality="10,30" />
+      <item name="gunBotT1JunkSledge" quality="10,30" />
+      <!-- *** Ranged_Weapons_T2 -->
+      <item name="gunBowT1IronCrossbow" quality="20,40" />
+      <item name="gunBowT3CompoundBow" quality="20,40" />
+      <item name="gunHandgunT2Magnum44" quality="20,40" />
+      <item name="gunShotgunT2PumpShotgun" quality="20,40" />
+      <item name="gunRifleT2LeverActionRifle" quality="20,40" />
+      <item name="gunMGT2TacticalAR" quality="20,40" />
+      <item name="gunBotT2JunkTurret" quality="20,40" />
+      <!-- *** Ranged_Weapons_T3 -->
+      <item name="gunBowT3CompoundCrossbow" quality="30,50" />
+      <item name="gunHandgunT3SMG5" quality="30,50" />
+      <item name="gunMGT3M60" quality="30,50" />
+      <item name="gunHandgunT2Magnum44" quality="30,50" />
+      <item name="gunHandgunT3DesertVulture" quality="30,50" />
+      <item name="gunShotgunT3AutoShotgun" quality="30,50" />
+      <item name="gunRifleT3SniperRifle" quality="30,50" />
+      <item name="gunExplosivesT3RocketLauncher" quality="30,50" />
+    </trader_item_group>
+    <!-- *** WEAPON_PARTS -->
+    <trader_item_group name="weaponsGunParts">
+      <!--Element contents replaced by: "DarknessFallsCore"-->
+      <item name="DFrifleParts" />
+      <item name="DFrifleBarrel" />
+      <item name="DFrifleStock" />
+      <item name="DFhuntingRifleReceiver" prob="0.8" />
+      <item name="DFwinchesterRifleReceiver" prob="0.5" />
+      <item name="DFsniperRifleReceiver" prob="0.3" />
+      <item name="DFshotgunParts" />
+      <item name="DFshotgunBarrel" />
+      <item name="DFshotgunStock" />
+      <item name="DFshotgunReceiver" prob="0.8" />
+      <item name="DFautoShotgunReceiver" prob="0.3" />
+      <item name="DFautoRifleParts" />
+      <item name="DFautoRifleBarrel" />
+      <item name="DFautoRifleStock" />
+      <item name="DFAR15Receiver" prob="0.8" />
+      <item name="DFAK47Receiver" prob="0.5" />
+      <item name="DFM60Receiver" prob="0.3" />
+      <item name="DFM4A1Receiver" prob="0.3" />
+      <item name="DFpistolParts" />
+      <item name="DFpistolBarrel" />
+      <item name="DFpistolGrip" />
+      <item name="DFpistolFrame" prob="0.8" />
+      <item name="DFP225Frame" prob="0.65" />
+      <item name="DFmagnumFrame" prob="0.5" />
+      <item name="DFDEagleFrame" prob="0.3" />
+    </trader_item_group>
+    <!-- *** AMMO -->
+    <trader_item_group name="ammoAll">
+      <item name="ammo9mmBulletBall" count="40,150" />
+      <item name="ammo762mmBulletBall" count="20,100" />
+      <item name="ammo44MagnumBulletBall" count="15,60" prob="0.5" />
+      <item name="ammoShotgunShell" count="15,100" />
+      <item name="ammoArrowStone" count="20,60" />
+      <item name="ammoCrossbowBoltStone" count="20,60" />
+      <item name="ammo9mmBulletHP" count="40,150" />
+      <item name="ammo762mmBulletHP" count="20,100" />
+      <item name="ammo44MagnumBulletHP" count="15,60" prob="0.5" />
+      <item name="ammoShotgunBreachingSlug" count="15,100" />
+      <item name="ammoArrowIron" count="20,60" />
+      <item name="ammoArrowFlaming" count="20,60" />
+      <item name="ammoCrossbowBoltIron" count="20,60" />
+      <item name="ammoCrossbowBoltFlaming" count="20,60" />
+      <item name="ammo9mmBulletAP" count="40,150" />
+      <item name="ammo762mmBulletAP" count="20,100" />
+      <item name="ammo44MagnumBulletAP" count="15,60" prob="0.5" />
+      <item name="ammoShotgunSlug" count="6,25" prob="0.2" />
+      <item name="ammoRocketHE" count="1,4" />
+      <item name="ammoRocketFrag" count="1,4" />
+      <item name="ammoArrowSteelAP" count="20,60" />
+      <item name="ammoArrowExploding" count="20,60" />
+      <item name="ammoCrossbowBoltSteelAP" count="20,60" />
+      <item name="ammoCrossbowBoltExploding" count="20,60" />
+    </trader_item_group>
+    <trader_item_group name="ammoArrowsBolts">
+      <item name="ammoArrowStone" count="20,60" />
+      <item name="ammoCrossbowBoltStone" count="20,60" />
+      <item name="ammoArrowIron" count="20,60" />
+      <item name="ammoCrossbowBoltIron" count="20,60" />
+      <item name="ammoArrowSteelAP" count="20,60" />
+      <item name="ammoCrossbowBoltSteelAP" count="20,60" />
+      <item name="ammoArrowFlaming" count="20,60" />
+      <item name="ammoCrossbowBoltFlaming" count="20,60" />
+      <item name="ammoArrowExploding" count="20,60" />
+      <item name="ammoCrossbowBoltExploding" count="20,60" />
+    </trader_item_group>
+    <trader_item_group name="ammoBrass">
+      <item name="ammo9mmBulletBall" count="40,150" />
+      <item name="ammo762mmBulletBall" count="20,100" />
+      <item name="ammo44MagnumBulletBall" count="15,60" prob="0.5" />
+      <item name="ammoShotgunShell" count="15,100" />
+      <item name="ammoShotgunBreachingSlug" count="15,100" />
+      <item name="ammoShotgunSlug" count="6,25" prob="0.2" />
+    </trader_item_group>
+    <trader_item_group name="ammoHP">
+      <item name="ammo9mmBulletHP" count="40,150" />
+      <item name="ammo762mmBulletHP" count="20,100" />
+      <item name="ammo44MagnumBulletHP" count="15,60" prob="0.5" />
+      <item name="ammoRocketHE" count="1,4" />
+    </trader_item_group>
+    <trader_item_group name="ammoAP">
+      <item name="ammo9mmBulletAP" count="40,150" />
+      <item name="ammo762mmBulletAP" count="20,100" />
+      <item name="ammo44MagnumBulletAP" count="15,60" prob="0.5" />
+      <item name="ammoRocketFrag" count="1,4" />
+    </trader_item_group>
+    <!-- *** THROWN_AMMO -->
+    <trader_item_group name="thrownAmmo">
+      <!--Element contents replaced by: "DarknessFallsCore"-->
+      <item name="DFnailBomb" count="5,20" />
+      <item name="thrownAmmoPipeBomb" count="5,20" />
+      <item name="thrownGrenadeContact" count="5,20" />
+      <item name="thrownGrenade" count="5,20" />
+      <item name="thrownTimedCharge" count="5,20" />
+      <item name="thrownDynamite" count="5,20" />
+      <item name="thrownAmmoMolotovCocktail" count="5,20" />
+    </trader_item_group>
+    <!-- *** AMMO_SUPPLIES -->
+    <trader_item_group name="ammoSupplies">
+      <item name="resourceBulletCasing" count="20,200" />
+      <!-- 5 -->
+      <item name="resourceBulletTip" count="20,200" />
+      <!-- 5 -->
+      <item name="resourceBuckshot" count="20,200" />
+      <!-- 5 -->
+      <item name="resourceGunPowder" count="20,200" />
+      <!-- 10 -->
+      <item name="resourcePaper" count="20,200" />
+      <!-- 10 -->
+      <item name="resourceArrowHeadIron" count="20,200" prob="0.05" />
+      <!-- 5 -->
+      <item name="resourceArrowHeadSteelAP" count="5,25" prob="0.05" />
+      <!-- 5 -->
+      <item name="resourceFeather" count="20,200" />
+      <!-- 5 -->
+    </trader_item_group>
+    <trader_item_group name="groupAllAmmo">
+      <item group="ammoArrowsBolts" count="1,2" />
+      <item group="ammoBrass" count="2,4" />
+      <item group="ammoHP" count="2,4" />
+      <item group="ammoAP" count="2,4" />
+    </trader_item_group>
+    <!-- *** MODS -->
+    <trader_item_group name="groupMeleeMods">
+      <!-- *** T1_MELEE_MODS -->
+      <item name="modMeleeSerratedBlade" />
+      <item name="modMeleeStructuralBrace" />
+      <item name="modMeleeWeightedHead" />
+      <item name="modMeleeGraveDigger" />
+      <item name="modMeleeWoodSplitter" />
+      <item name="modFuelTankSmall" />
+      <!-- *** T2_MELEE_MODS -->
+      <item name="modMeleeClubBurningShaft" />
+      <item name="modMeleeClubBarbedWire" />
+      <item name="modMeleeFortifyingGrip" />
+      <item name="modMeleeBunkerBuster" />
+      <item name="modFuelTankLarge" />
+      <!-- *** T3_MELEE_MODS -->
+      <item name="modMeleeClubMetalSpikes" />
+      <item name="modMeleeErgonomicGrip" />
+      <item name="modMeleeTemperedBlade" />
+      <item name="modMeleeIronBreaker" />
+      <item name="modGunMeleeRadRemover" />
+    </trader_item_group>
+    <trader_item_group name="groupRangedMods">
+      <!-- *** T1_RANGED_MODS-->
+      <item name="modGunChoke" />
+      <item name="modGunDuckbill" />
+      <item name="modGunBipod" />
+      <item name="modGunFlashlight" />
+      <item name="modGunForegrip" />
+      <item name="modGunMagazineExtender" />
+      <item name="modGunMeleeTheHunter" />
+      <item name="modGunMuzzleBrake" />
+      <item name="modGunScopeSmall" />
+      <item name="modShotgunSawedOffBarrel" />
+      <item name="modGunTriggerGroupSemi" />
+      <!-- *** T2_RANGED_MODS -->
+      <item name="modGunBarrelExtender" />
+      <item name="modGunCrippleEm" />
+      <item name="modGunLaserSight" />
+      <item name="modGunReflexSight" />
+      <item name="modGunRetractingStock" />
+      <item name="modGunScopeMedium" />
+      <item name="modGunSoundSuppressorSilencer" />
+      <item name="modGunTriggerGroupBurst3" />
+      <!-- *** T3_RANGED_MODS -->
+      <item name="modGunBowPolymerString" />
+      <item name="modGunScopeLarge" />
+      <item name="modGunTriggerGroupAutomatic" />
+    </trader_item_group>
+    <trader_item_group name="groupArmorMods">
+      <!-- *** T1_ARMOR_MODS -->
+      <item name="modArmorHelmetLight" />
+      <item name="modArmorInsulatedLiner" />
+      <item name="modArmorCoolingMesh" />
+      <item name="modArmorPlatingBasic" />
+      <item name="modArmorStoragePocket" />
+      <item name="modArmorImprovedFittings" />
+      <item name="modArmorPerception" />
+      <item name="modArmorStrength" />
+      <item name="modArmorFortitude" />
+      <item name="modArmorAgility" />
+      <item name="modArmorIntellect" />
+      <item name="modArmorTreasureHunter" />
+      <!-- *** T2_ARMOR_MODS -->
+      <item name="modArmorWaterPurifier" />
+      <item name="modArmorImpactBracing" />
+      <item name="modArmorPlatingReinforced" />
+      <item name="modArmorMuffledConnectors" />
+      <item name="modArmorDoubleStoragePocket" />
+      <item name="modArmorCustomizedFittings" />
+      <item name="modArmorCigar" />
+      <!-- *** T3_ARMOR_MODS -->
+      <item name="modArmorBandolier" />
+      <item name="modArmorTripleStoragePocket" />
+      <item name="modArmorAdvancedMuffledConnectors" />
+      <item name="modArmorNightVision" />
+    </trader_item_group>
+    <trader_item_group name="groupModsAll">
+      <item group="groupMeleeMods" />
+      <item group="groupRangedMods" />
+      <item group="groupArmorMods" />
+    </trader_item_group>
+    <!-- *** Dyes -->
+    <trader_item_group name="groupDyeMods">
+      <item name="modDyeBrown" />
+      <item name="modDyeRed" />
+      <item name="modDyeOrange" />
+      <item name="modDyeYellow" />
+      <item name="modDyeGreen" />
+      <item name="modDyeBlue" />
+      <item name="modDyePurple" />
+      <item name="modDyePink" />
+      <item name="modDyeBlack" />
+    </trader_item_group>
+    <!-- *** LIGHT_ARMORS -->
+    <trader_item_group name="groupArmorLight">
+      <!--Element contents replaced by: "DarknessFallsCore"-->
+      <item group="groupArmorT0Light" />
+      <item group="groupArmorT1Light" />
+      <item group="groupArmorT2Light" />
+    </trader_item_group>
+    <!-- *** LIGHT_ARMORS -->
+    <!--Element removed by: "DarknessFallsCore" (XPath: "/traders/trader_item_groups/trader_item_group[@name='groupArmorMedium']")-->
+    <!-- *** HEAVY_ARMORS-->
+    <trader_item_group name="groupArmorHeavy">
+      <!--Element contents replaced by: "DarknessFallsCore"-->
+      <item group="groupArmorT0Heavy" />
+      <item group="groupArmorT1Heavy" />
+      <item group="groupArmorT2Heavy" />
+    </trader_item_group>
+    <!-- *** BOOKS -->
+    <trader_item_group name="perkBooks">
+      <!--Element contents replaced by: "DarknessFallsCore"-->
+      <item name="gunBowT1WoodenBowSchematic" />
+      <item name="gunHandgunT1PistolSchematic" />
+      <item name="gunShotgunT1DoubleBarrelSchematic" />
+      <item name="gunMGT1AK47Schematic" />
+      <item name="gunRifleT1HuntingRifleSchematic" />
+      <item name="gunBowT1IronCrossbowSchematic" />
+      <item name="gunHandgunT2Magnum44Schematic" />
+      <item name="DFgunP225Schematic" />
+      <item name="gunShotgunT2PumpShotgunSchematic" />
+      <item name="gunMGT2TacticalARSchematic" />
+      <item name="gunRifleT2LeverActionRifleSchematic" />
+      <item name="gunBowT3CompoundBowSchematic" />
+      <item name="gunBowT3CompoundCrossbowSchematic" />
+      <item name="gunHandgunT3DesertVultureSchematic" />
+      <item name="gunHandgunT3SMG5Schematic" />
+      <item name="gunShotgunT1DoubleBarrelSchematic" />
+      <item name="gunShotgunT3AutoShotgunSchematic" />
+      <item name="gunRifleT3SniperRifleSchematic" />
+      <item name="DFgunWinchesterRifleSchematic" />
+      <item name="meleeWpnClubT1BaseballBatSchematic" />
+      <item name="meleeWpnKnucklesT1IronKnucklesSchematic" />
+      <item name="meleeWpnBladeT1HuntingKnifeSchematic" />
+      <item name="meleeWpnSledgeT1IronSledgehammerSchematic" />
+      <item name="meleeWpnClubT3SteelClubSchematic" />
+      <item name="meleeWpnSpearT1IronSpearSchematic" />
+      <item name="meleeWpnKnucklesT3SteelKnucklesSchematic" />
+      <item name="meleeWpnSledgeT3SteelSledgehammerSchematic" />
+      <item name="meleeWpnBladeT3MacheteSchematic" />
+      <item name="meleeWpnSpearT3SteelSpearSchematic" />
+      <item name="meleeToolSalvageT1WrenchSchematic" />
+      <item name="meleeWpnBladeT1HuntingKnifeSchematic" />
+      <item name="meleeWpnSledgeT1IronSledgehammerSchematic" />
+      <item name="meleeToolSalvageT2RatchetSchematic" />
+      <item name="meleeToolSalvageT3ImpactDriverSchematic" />
+      <item name="meleeToolPickT3AugerSchematic" />
+      <item name="meleeToolAxeT3ChainsawSchematic" />
+      <item name="meleeToolRepairT3NailgunSchematic" />
+      <item name="DFforgeAhead" />
+      <item name="workbenchSchematic" />
+      <item name="cementMixerSchematic" />
+      <item name="chemistryStationSchematic" />
+      <item name="plantedAloe1Schematic" />
+      <item name="plantedBlueberry1Schematic" />
+      <item name="plantedChrysanthemum1Schematic" />
+      <item name="plantedCotton1Schematic" />
+      <item name="DFseedWheatSchematic" />
+      <item name="DFseedOrangeSchematic" />
+      <item name="plantedCorn1Schematic" />
+      <item name="plantedMushroom1Schematic" />
+      <item name="DFseedCarrotSchematic" />
+      <item name="DFseedCannabisSchematic" />
+      <item name="DFseedBananaSchematic" />
+      <item name="plantedCoffee1Schematic" />
+      <item name="drinkJarRedTeaSchematic" />
+      <item name="drinkJarGoldenRodTeaSchematic" />
+      <item name="DFappleJuiceSchematic" />
+      <item name="DForangeJuiceSchematic" />
+      <item name="DFdrinkRiceMilkSchematic" />
+      <item name="foodMeatStewSchematic" />
+      <item name="foodVegetableStewSchematic" />
+      <item name="foodBlueberryPieSchematic" />
+      <item name="foodSteakAndPotatoSchematic" />
+      <item name="DFvegetableSoupSchematic" />
+      <item name="DFapplePieSchematic" />
+      <item name="DForangeMarmaladeSchematic" />
+      <item name="foodJarBlueberryJamSchematic" />
+      <item name="DFRicePuddingSchematic" />
+      <item name="DFChesseSchematic" />
+      <item name="drinkYuccaJuiceSmoothieSchematic" />
+      <item name="DFtomatoJuiceSchematic" />
+      <item name="DForangeTeaSchematic" />
+      <item name="DFblueberryPancakesSchematic" />
+      <item name="DFbananaPancakesSchematic" />
+      <item name="DFmarmaladeToastSchematic" />
+      <item name="DFCheesePizzaSchematic" />
+      <item name="DFminibikeBook" />
+      <!--
+		<item name="armorLeatherSetSchematic"/>
+		<item name="armorIronSetSchematic"/>
+		<item name="armorSteelSetSchematic"/>
+		<item name="armorMilitarySetSchematic"/> -->
+    </trader_item_group>
+    <trader_item_group name="skillMagazines">
+      <!--Element contents replaced by: "DarknessFallsCore"-->
+      <item name="DFskillAthleticsBook" />
+      <item name="DFskillMiningBook" />
+      <item name="DFskillScavengingBook" />
+      <item name="DFskillArcheryBook" />
+      <item name="DFskillAutomaticsBook" />
+      <item name="DFskillBluntBook" />
+      <item name="DFskillBladesBook" />
+      <item name="DFskillPistolBook" />
+      <item name="DFskillShotgunBook" />
+      <item name="DFskillRiflesBook" />
+    </trader_item_group>
+    <!-- *** SCHEMATICS -->
+    <trader_item_group name="schematicsModsCommon">
+      <item name="modArmorHelmetLightSchematic" />
+      <item name="modArmorBandolierSchematic" />
+      <item name="modArmorInsulatedLinerSchematic" />
+      <item name="modArmorCoolingMeshSchematic" />
+      <item name="modArmorPlatingBasicSchematic" />
+      <item name="modArmorImprovedFittingsSchematic" />
+      <item name="modArmorStoragePocketSchematic" />
+      <item name="modArmorDoubleStoragePocketSchematic" />
+      <item name="modArmorMuffledConnectorsSchematic" />
+      <item name="modGunBarrelExtenderSchematic" />
+      <item name="modGunMuzzleBrakeSchematic" />
+      <item name="modGunFlashlightSchematic" />
+      <item name="modGunScopeSmallSchematic" />
+      <item name="modGunScopeMediumSchematic" />
+      <item name="modGunReflexSightSchematic" />
+      <item name="modGunTriggerGroupSemiSchematic" />
+      <item name="modGunBipodSchematic" />
+      <item name="modGunForegripSchematic" />
+      <item name="modGunRetractingStockSchematic" />
+      <item name="modGunDuckbillSchematic" />
+      <item name="modGunChokeSchematic" />
+      <item name="modGunMagazineExtenderSchematic" />
+      <item name="modShotgunSawedOffBarrelSchematic" />
+      <item name="modGunCrippleEmSchematic" />
+      <item name="modGunBowArrowRestSchematic" />
+      <item name="modGunBowPolymerStringSchematic" />
+      <item name="modMeleeTemperedBladeSchematic" />
+      <item name="modMeleeSerratedBladeSchematic" />
+      <item name="modMeleeWeightedHeadSchematic" />
+      <item name="modMeleeStructuralBraceSchematic" />
+      <item name="modMeleeErgonomicGripSchematic" />
+      <item name="modMeleeFortifyingGripSchematic" />
+      <item name="modMeleeClubBarbedWireSchematic" />
+      <item name="modMeleeClubMetalSpikesSchematic" />
+      <item name="modMeleeClubBurningShaftSchematic" />
+      <item name="modMeleeGraveDiggerSchematic" />
+      <item name="modMeleeWoodSplitterSchematic" />
+      <item name="modFuelTankSmallSchematic" />
+      <item name="modFuelTankLargeSchematic" />
+      <item name="modGunMeleeTheHunterSchematic" />
+    </trader_item_group>
+    <!--Element removed by: "DarknessFallsCore" (XPath: "/traders/trader_item_groups/trader_item_group[@name='schematicsVehiclesMods']")-->
+    <trader_item_group name="commonBooks">
+      <!--Element contents replaced by: "DarknessFallsCore"-->
+      <item group="perkBooks" prob="120" />
+      <item group="schematicsModsCommon" prob="70" />
+    </trader_item_group>
+    <trader_item_group name="rareBooks">
+      <item name="modRoboticDroneCargoModSchematic" />
+      <item name="modRoboticDroneMedicModSchematic" />
+      <item name="modRoboticDroneHeadlampModSchematic" />
+      <item name="modRoboticDroneArmorPlatingModSchematic" />
+      <item name="modRoboticDroneMoraleBoosterModSchematic" />
+    </trader_item_group>
+    <trader_item_group name="books">
+      <item group="perkBooks" prob="1" />
+      <item group="rareBooks" prob="0.3" />
+      <item group="commonBooks" />
+    </trader_item_group>
+    <!-- *** MEDICAL -->
+    <trader_item_group name="rareMedicine">
+      <item name="medicalFirstAidKit" />
+      <item name="toolBeaker" />
+      <item name="drugAntibiotics" />
+      <item name="drugFortBites" />
+      <item name="drugRecog" />
+      <item name="drugSteroids" />
+      <item name="drinkJarGrandpasMoonshine" />
+      <item name="drinkJarGrandpasAwesomeSauce" />
+      <item name="drinkJarGrandpasLearningElixir" />
+    </trader_item_group>
+    <trader_item_group name="medicine">
+      <item name="drugPainkillers" />
+      <item name="medicalFirstAidBandage" count="1,4" />
+      <item name="medicalBandage" />
+      <item name="medicalBloodBag" count="2,4" />
+      <item name="drugVitamins" />
+      <item name="medicalSplint" />
+      <item group="rareMedicine" />
+    </trader_item_group>
+    <!-- *** FOOD -->
+    <!-- *** SEEDS -->
+    <trader_item_group name="seeds">
+      <item name="plantedPotato1" />
+      <item name="plantedCoffee1" />
+      <item name="plantedCorn1" />
+      <item name="plantedBlueberry1" />
+      <item name="plantedCotton1" />
+      <item name="plantedGoldenrod1" />
+      <item name="plantedAloe1" />
+      <item name="plantedMushroom1" />
+      <item name="plantedYucca1" />
+      <item name="plantedHop1" />
+      <item name="plantedChrysanthemum1" />
+      <item name="plantedPumpkin1" />
+    </trader_item_group>
+    <!-- *** CANNED_FOOD -->
+    <trader_item_group name="cannedfood">
+      <!--Element contents replaced by: "DarknessFallsCore"-->
+      <item name="foodCanBeef" />
+      <item name="foodCanCatfood" />
+      <item name="foodCanChicken" />
+      <item name="foodCanChili" />
+      <item name="foodCanDogfood" />
+      <item name="foodCanSham" />
+      <item name="foodCanLamb" />
+      <item name="foodCanMiso" />
+      <item name="foodCanPasta" />
+      <item name="foodCanPeas" />
+      <item name="foodCanSalmon" />
+      <item name="foodCanSoup" />
+      <item name="foodCanStock" />
+      <item name="foodCanTuna" />
+      <item name="foodCanPears" />
+      <item name="foodHoney" />
+      <item name="DForangeMarmalade" />
+      <item name="foodJarBlueberryJam" />
+      <item name="foodBagTrailMix" />
+      <item name="foodBagOfDriedFruit" />
+      <item name="foodBagOfPeanuts" />
+      <item name="foodJarPeanutButter" />
+      <item name="foodCanBakedBeans" />
+    </trader_item_group>
+    <!-- *** CANDY -->
+    <trader_item_group name="foodCandy">
+      <item name="drugAtomJunkies" />
+      <item name="drugCovertCats" />
+      <item name="drugEyeKandy" />
+      <item name="drugHackers" />
+      <item name="drugHealthBar" />
+      <item name="drugJailBreakers" />
+      <item name="drugNerdTats" />
+      <item name="drugOhShitzDrops" />
+      <item name="drugRockBusters" />
+      <item name="drugSkullCrushers" />
+      <item name="drugSugarButts" />
+    </trader_item_group>
+    <!-- *** RAW_INGREDIENTS -->
+    <trader_item_group name="foodSupplies">
+      <item name="foodEgg" count="2,8" />
+      <item name="foodRawMeat" count="10,40" />
+      <item name="foodCropCorn" count="4,20" />
+      <item name="foodCropPotato" count="4,18" />
+      <item name="foodCropBlueberries" count="5,20" />
+      <item name="foodCornMeal" count="5,20" />
+      <item name="foodCropMushrooms" count="4,8" />
+      <item name="foodHoney" count="1,2" />
+    </trader_item_group>
+    <!-- *** PREPARED_FOOD -->
+    <trader_item_group name="preparedFood">
+      <!--Element contents replaced by: "DarknessFallsCore"-->
+      <item name="foodMeatStew" count="1,2" />
+      <item name="foodVegetableStew" count="1,2" />
+      <item name="foodSteakAndPotato" count="1,2" />
+      <item name="foodBlueberryPie" count="1,2" />
+      <item name="DFvegetableSoup" count="1,2" />
+      <item name="DFapplePie" count="1,2" />
+      <item name="DForangeMarmalade" count="1,2" />
+      <item name="foodJarBlueberryJam" count="1,2" />
+      <item name="DFRicePudding" count="1,2" />
+      <item name="DFblueberryPancakes" count="1,2" />
+      <item name="DFbananaPancakes" count="1,2" />
+      <item name="DFmarmaladeToast" count="1,2" />
+      <item name="DFCheesePizza" count="1,2" />
+      <item name="DFfoodFishPie" count="1,2" />
+    </trader_item_group>
+    <!-- *** PREPARED_DRINKS -->
+    <trader_item_group name="groupDrinks">
+      <!--Element contents replaced by: "DarknessFallsCore"-->
+      <item name="drinkJarBoiledWater" count="2,4" />
+      <item name="drinkJarRedTea" count="1,2" />
+      <item name="drinkJarGoldenRodTea" count="1,2" />
+      <item name="DFappleJuice" count="1,2" />
+      <item name="DForangeJuice" count="1,2" />
+      <item name="DFdrinkRiceMilk" count="1,2" />
+      <item name="drinkJarCoffee" count="1,2" />
+      <item name="drinkYuccaJuiceSmoothie" count="1,2" />
+      <item name="DFtomatoJuice" count="1,2" />
+      <item name="DForangeTea" count="1,2" />
+    </trader_item_group>
+    <!-- *** SPECIAL_DRINKS -->
+    <trader_item_group name="groupDrinksSpecial">
+      <item name="drinkJarBlackStrapCoffee" count="1,2" />
+      <item name="drinkCanMegaCrush" count="1,2" />
+      <item name="drinkJarGrandpasMoonshine" count="1,2" />
+      <item name="drinkJarGrandpasLearningElixir" count="1,2" />
+      <item name="drinkJarGrandpasAwesomeSauce" count="1,2" />
+    </trader_item_group>
+    <!-- *** FOOD_ALL -->
+    <trader_item_group name="groupFoodAll">
+      <item group="cannedfood" count="1" />
+      <item group="foodSupplies" count="1" />
+      <item group="preparedFood" count="1" />
+      <item group="groupDrinks" count="1" />
+    </trader_item_group>
+    <!-- *** FOOD_VENDING -->
+    <trader_item_group name="foodVending">
+      <item group="cannedfood" />
+    </trader_item_group>
+    <!-- *** DRINK_VENDING -->
+    <trader_item_group name="drinkVending">
+      <item group="groupDrinks" />
+    </trader_item_group>
+    <!-- *** DRINK_SPECIAL_VENDING -->
+    <trader_item_group name="drinkSpecialVending">
+      <item group="groupDrinksSpecial" />
+    </trader_item_group>
+    <!-- *** CONSTRUCTION_SUPPLIES -->
+    <trader_item_group name="constructionSupplies">
+      <item name="resourceCement" count="50,500" />
+      <item name="resourceCobblestones" count="50,500" />
+      <item name="resourceConcreteMix" count="100,500" />
+      <item name="resourceNail" count="10,100" />
+    </trader_item_group>
+    <!-- *** GENERAL_RESOURCES -->
+    <trader_item_group name="generalResources">
+      <item name="resourceWood" count="50,1000" />
+      <item name="resourceCrushedSand" count="50,500" />
+      <item name="resourcePotassiumNitratePowder" count="20,60" />
+      <item name="resourceCoal" count="20,60" />
+      <item name="resourceScrapLead" count="5,90" />
+      <item name="resourceScrapBrass" count="30,80" />
+      <item name="resourceScrapIron" count="25,250" />
+      <item name="resourceForgedIron" count="5,50" />
+      <item name="resourceForgedSteel" count="5,50" />
+      <item name="resourceMetalPipe" count="5,20" />
+      <item name="resourceOilShale" count="20,60" />
+      <item name="resourceOil" count="3,10" />
+      <item name="resourceGlue" count="5,15" />
+      <item name="resourceDuctTape" count="10,30" />
+      <item name="resourceCloth" count="5,100" />
+      <item name="resourceLeather" count="5,25" />
+      <item name="resourceScrapPolymers" count="30,150" />
+      <item name="resourceGunPowder" count="3,30" />
+      <item name="resourceAcid" count="1" prob="0.6" />
+      <item name="resourceAnimalFat" count="5,40" />
+      <item name="resourceHeadlight" count="5,20" prob="0.6" />
+      <item name="resourceSpring" count="5,30" />
+      <item name="resourceElectricParts" count="15,50" prob="0.7" />
+      <item name="resourceMechanicalParts" count="15,80" prob="0.8" />
+      <item name="resourceLockPick" count="1,10" />
+      <item name="candle" count="5,20" />
+      <item name="bucketEmpty" prob="0.6" />
+    </trader_item_group>
+    <trader_item_group name="rareTools" count="1">
+      <!--Element contents replaced by: "DarknessFallsCore"-->
+      <item name="meleeToolPickT2SteelPickaxe" quality="30,50" />
+      <item name="meleeToolShovelT2SteelShovel" quality="30,50" />
+      <item name="meleeToolPickT3Auger" quality="30,50" />
+      <item name="meleeToolAxeT2SteelAxe" quality="30,50" />
+      <item name="meleeToolAxeT3Chainsaw" quality="30,50" />
+      <item name="meleeToolRepairT3Nailgun" quality="30,50" />
+      <item name="meleeToolSalvageT2Ratchet" quality="20,40" />
+      <item name="meleeToolSalvageT3ImpactDriver" quality="30,50" />
+    </trader_item_group>
+    <trader_item_group name="tools" count="1">
+      <!--Element contents replaced by: "DarknessFallsCore"-->
+      <item name="DFmeleeToolPickaxeScrap" quality="10,30" />
+      <item name="meleeToolPickT1IronPickaxe" quality="20,40" />
+      <item name="DFmeleeToolShovelScrap" quality="10,30" />
+      <item name="meleeToolShovelT1IronShovel" quality="20,40" />
+      <item name="DFmeleeToolFireaxeScrap" quality="10,30" />
+      <item name="meleeToolAxeT1IronFireaxe" quality="20,40" />
+      <item name="resourceRepairKit" count="1,4" />
+      <item name="meleeToolPaintTool" prob="0.5" />
+      <item name="meleeToolWireTool" />
+    </trader_item_group>
+    <!-- *** VEHICLES -->
+    <trader_item_group name="groupVehicles" count="1">
+      <!--Element contents replaced by: "DarknessFallsCore"-->
+      <item name="vehicleWheels" />
+      <item name="smallEngine" />
+      <item name="carBattery" />
+      <!-- *** Bicycle -->
+      <item name="vehicleBicycleChassis" />
+      <item name="vehicleBicycleHandlebars" />
+      <!-- *** Minibike -->
+      <item name="vehicleMinibikeChassis" />
+      <item name="vehicleMinibikeHandlebars" />
+    </trader_item_group>
+    <!-- *** BLOCKS -->
+    <!-- *** WORK_SATIONS -->
+    <trader_item_group name="workstations" count="1">
+      <item name="forge" />
+      <item name="workbench" />
+      <item name="cementMixer" />
+      <item name="chemistryStation" />
+    </trader_item_group>
+    <trader_item_group name="decorativeBlinds" count="all">
+      <item name="miniblindTopSheet" count="10,15" />
+      <item name="miniblindBottomSheet" count="10,15" />
+    </trader_item_group>
+    <!-- *** DECO_BLOCKS -->
+    <trader_item_group name="decorativeBlocks" count="1">
+      <item group="decorativeBlinds" />
+      <item name="airConditioner" count="2,3" />
+      <item name="appliancesVariantHelper" count="2,3" />
+      <item name="cntCashRegister_Player" />
+      <item name="cntCoolerVariantHelper" />
+      <item name="cntFileCabinetBlockVariantHelper" />
+      <item name="sinkKitchen" count="2,4" />
+      <item name="pictureVariantHelper" count="2,3" />
+      <item name="cntWaterCoolerFull" />
+      <item name="pipeLargeBlockVariantHelper" count="20,30" />
+      <item name="pipeSmallBlockVariantHelper" count="20,30" />
+      <item name="treeAzalea" count="8,15" />
+      <item name="barStoolVariantHelper" count="4,8" />
+      <item name="sinksToiletsBlockVariantHelper" count="4,8" />
+      <item name="toiletsBlockVariantHelper" count="4,8" />
+    </trader_item_group>
+    <!-- *** LANDMINES -->
+    <trader_item_group name="landMines" count="1">
+      <item name="mineCandyTin" count="1,6" />
+      <item name="mineHubcap" count="1,5" />
+      <item name="mineAirFilter" count="1,4" />
+    </trader_item_group>
+    <!-- *** ELECTRICAL_SYSTEM -->
+    <trader_item_group name="traderElectrical" count="1">
+      <!-- *** POWER_PRODUCTION -->
+      <item name="resourceElectricParts" count="15,35" prob="0.5" />
+      <item name="generatorbank" count="1" prob="1" />
+      <item name="batterybank" count="1" prob="0.7" />
+      <item name="solarbank" count="1" prob="0.7" />
+      <!-- *** ACTIVATION -->
+      <item name="switch" count="3,9" prob="1.0" />
+      <item name="tripwirepost" count="1,5" prob="1.0" />
+      <item name="pressureplate" count="1,5" prob="1.0" />
+      <item name="motionsensor" count="1,2" prob="1.0" />
+      <!-- *** RELAYS -->
+      <item name="electricwirerelay" count="5,15" prob="1.0" />
+      <item name="electrictimerrelay" count="1,3" prob="1.0" />
+      <!-- *** LIGHTS_MISC -->
+      <item name="lanternDecorLightBlockVariantHelper" count="1" prob="1.0" />
+      <item name="lanternOldBlockVariantHelper" count="5" prob="1.0" />
+      <item name="ceilingLight01_player" count="1,6" prob="1.0" />
+      <item name="spotlightPlayer" count="1,2" prob="1.0" />
+      <item name="speaker" count="1,2" prob="1.0" />
+      <!-- *** TRAPS -->
+      <item name="electricfencepost" count="2,6" prob="1.0" />
+      <item name="ammoDartIron" count="15,70" prob="1.0" />
+      <item name="dartTrap" count="1,2" prob="1.0" />
+      <item name="bladeTrap" count="1,3" prob="0.8" />
+      <item name="autoTurret" count="1,2" prob="0.5" />
+      <item name="shotgunTurret" count="1,2" prob="0.7" />
+    </trader_item_group>
+    <trader_item_group name="traderSolarCells" count="1">
+      <item name="solarCell" quality="1" />
+      <item name="solarCell" quality="2" />
+      <item name="solarCell" quality="3" />
+      <item name="solarCell" quality="4" />
+      <item name="solarCell" quality="5" />
+      <item name="solarCell" quality="6" />
+    </trader_item_group>
+    <!-- *** TRADER_ALWAYS -->
+    <trader_item_group name="traderAlways" count="all">
+      <!--Element contents replaced by: "DarknessFallsCore"-->
+      <item group="groupAllAmmo" count="2,4" />
+      <item name="resourcePotassiumNitratePowder" count="2,5" />
+      <item name="resourceGunPowder" count="25,25" />
+      <item group="ammoSupplies" count="2" />
+      <item group="thrownAmmo" count="2" />
+      <item name="drinkJarBoiledWater" count="2,4" />
+      <item group="groupFoodAll" count="1,3" />
+      <item name="cntVendingMachine" count="1" />
+    </trader_item_group>
+    <!-- *** TRADER_GENERAL -->
+    <trader_item_group name="traderGeneral" count="1">
+      <!--Element contents replaced by: "DarknessFallsCore"-->
+      <item group="groupAllAmmo" count="2,4" prob="2" />
+      <item name="resourcePaint" count="1,12" />
+      <!--
+		<item group="clothes" count="2,4"/> -->
+      <item group="weaponsGunParts" count="1" prob=".4" />
+      <item name="resourceMilitaryFiber" count="2,3" />
+      <item name="meleeToolFlashlight02" />
+      <item group="books" count="1,3" prob="1" />
+      <item group="ammoSupplies" count="1,3" />
+      <item group="seeds" count="1,4" />
+      <item group="cannedfood" count="1,2" />
+      <item group="foodSupplies" count="2,5" />
+      <item group="preparedFood" count="1,2" />
+      <item group="groupDrinks" count="1" />
+      <item group="landMines" count="1" prob="0.5" />
+      <item group="constructionSupplies" count="1,3" prob="0.8" />
+      <item group="rareTools" count="1" />
+      <item group="rareMedicine" count="1" prob="0.3" />
+      <item group="medicine" count="1,2" prob="1" />
+      <item name="drugAntibiotics" count="1,3" prob="0.5" />
+      <item group="workstations" count="1" />
+      <item group="groupVehicles" count="1,2" />
+      <item name="DFGenericSchematic" count="5,30" />
+    </trader_item_group>
+    <trader_item_group name="traderResources">
+      <!--Element inserted by: "DarknessFallsCore"-->
+      <item name="resourceWood" count="1000,5000" />
+      <!-- 50 -->
+      <item name="resourceRockSmall" count="500,1000" />
+      <!-- 50 -->
+      <item name="resourceCrushedSand" count="500,1000" />
+      <!-- 50 -->
+      <item name="resourceScrapIron" count="100,250" />
+      <!-- 10 -->
+      <item name="resourceScrapPolymers" count="10,25" />
+      <item name="resourceMetalPipe" count="5,10" />
+      <item name="resourceOilShale" count="10,100" />
+      <!-- 50 -->
+      <item name="resourceLeather" count="5,25" />
+      <item name="resourceScrapBrass" count="100,500" />
+      <!-- 10 -->
+      <item name="resourceClayLump" count="1000,5000" />
+      <!-- 150 -->
+      <item name="resourceScrapLead" count="100,500" />
+      <!-- 5 -->
+      <item name="resourceCloth" count="25,100" />
+      <item name="resourceMilitaryFiber" count="5,50" prob="0.1" />
+      <item name="resourceCoal" count="100,500" />
+      <!-- 10 -->
+      <item name="resourcePotassiumNitratePowder" count="50,250" />
+      <!-- 10 -->
+      <item name="resourceGunPowder" count="10,100" />
+      <!-- 10 -->
+      <item name="resourceOil" count="5,50" />
+      <item name="resourceHeadlight" count="1,10" prob="0.6" />
+      <item name="resourceDuctTape" count="5,25" />
+      <item name="resourceSpring" count="5,25" />
+      <item name="resourceMechanicalParts" count="5,25" prob="0.3" />
+      <item name="resourceElectricParts" count="5,25" prob="0.2" />
+      <item name="resourceDuctTape" count="10,30" />
+      <item name="resourceGlue" count="5,15" />
+      <item name="ammoGasCan" count="100,500" />
+      <!-- 5 -->
+      <item name="resourceForgedIron" count="5,50" />
+    </trader_item_group>
+    <trader_item_group name="caitlinResources">
+      <!--Element inserted by: "DarknessFallsCore"-->
+      <!-- bundle size -->
+      <item name="resourceOilShale" count="200,600" />
+      <!-- 50 -->
+      <item name="resourceScrapBrass" count="500,4000" />
+      <!-- 10 -->
+      <item name="resourceScrapLead" count="500,9000" />
+      <!-- 5 -->
+      <item name="resourceCloth" count="50,1000" />
+      <item name="resourceMilitaryFiber" count="50,200" prob="0.6" />
+      <item name="resourceCoal" count="2000,6000" />
+      <!-- 10 -->
+      <item name="resourcePotassiumNitratePowder" count="2000,6000" />
+      <!-- 10 -->
+      <item name="resourceGunPowder" count="300,3000" />
+      <!-- 10 -->
+      <item name="resourceOil" count="300,1000" />
+      <item name="bucketEmpty" prob="0.6" />
+      <item name="resourceHeadlight" count="5,20" prob="0.6" />
+      <item name="resourceDuctTape" count="5,20" />
+      <item name="resourceSpring" count="5,30" />
+      <item name="resourceMechanicalParts" count="150,800" prob="0.8" />
+      <item name="resourceElectricParts" count="150,500" prob="0.7" />
+    </trader_item_group>
+    <trader_item_group name="rareconstructionSupplies">
+      <!--Element inserted by: "DarknessFallsCore"-->
+      <item name="resourceConcreteMix" count="2000,5000" />
+      <!-- 20 -->
+      <item name="resourceForgedIron" count="2000,8000" />
+      <item name="resourceForgedSteel" count="1000,4000" />
+    </trader_item_group>
+    <trader_item_group name="bookscaitlin" count="1">
+      <!--Element inserted by: "DarknessFallsCore"-->
+      <item name="DFFarmerMasteryBook" prob="0.25" />
+      <item name="DFHunterMasteryBook" prob="0.25" />
+      <item name="DFLaborerMasteryBook" prob="0.25" />
+      <item name="DFMechanicMasteryBook" prob="0.25" />
+      <item name="DFScientistMasteryBook" prob="0.25" />
+      <item name="DFSecuritytMasteryBook" prob="0.25" />
+      <item name="DFSurvivalistMasteryBook" prob="0.25" />
+      <item name="DFClassPaper" prob="0.01" />
+    </trader_item_group>
+    <trader_item_group name="GCmedicine">
+      <!--Element inserted by: "DarknessFallsCore"-->
+      <item name="resourceCropAloeLeaf" count="10,30" />
+      <item name="drugPainkillers" />
+      <item name="DFsterileBandage" count="1,5" prob="0.6" />
+      <item name="drugHerbalAntibiotics" />
+      <item name="drugVitamins" />
+      <item name="medicalSplint" />
+      <item name="medicalPlasterCast" count="1,3" prob="0.3" />
+    </trader_item_group>
+    <trader_item_group name="workstationToolsGeneric">
+      <!--Element inserted by: "DarknessFallsCore"-->
+      <item name="meleeToolRepairT1ClawHammer" quality="10,40" />
+      <item name="meleeToolSalvageT1Wrench" quality="10,40" />
+      <item name="resourceForgedIron" count="25,100" />
+      <item name="resourceForgedSteel" count="5,50" prob="0.6" />
+    </trader_item_group>
+    <trader_item_group name="workstationToolsRekt">
+      <!--Element inserted by: "DarknessFallsCore"-->
+      <item name="DFtooltanningRack" count="1" />
+      <item name="resourceSewingKit" count="1" />
+      <item name="toolBeaker" count="1" />
+    </trader_item_group>
+    <trader_item_group name="workstationToolsJen">
+      <!--Element inserted by: "DarknessFallsCore"-->
+      <item name="DFtooltanningRack" count="1" />
+      <item name="resourceSewingKit" count="1" />
+      <item name="toolBeaker" count="1" />
+    </trader_item_group>
+    <trader_item_group name="workstationToolsBob">
+      <!--Element inserted by: "DarknessFallsCore"-->
+      <item name="smallEngine" count="1" />
+      <item name="DFtoolweldingTorch" count="1" />
+      <item name="toolForgeCrucible" count="1" />
+    </trader_item_group>
+    <trader_item_group name="workstationToolsHugh">
+      <!--Element inserted by: "DarknessFallsCore"-->
+      <item name="toolAnvil" count="1" />
+      <item name="toolBellows" count="1" />
+      <item name="toolForgeCrucible" count="1" />
+    </trader_item_group>
+    <trader_item_group name="workstationToolsJoel">
+      <!--Element inserted by: "DarknessFallsCore"-->
+      <item name="toolAndDieSet" count="1" />
+      <item name="DFtoolCalipers" count="1" />
+      <item name="toolBellows" count="1" />
+    </trader_item_group>
+    <trader_item_group name="skillMagazinesTraderBob">
+      <!--Element inserted by: "DarknessFallsCore"-->
+      <item name="DFminibikeBook" />
+      <item name="DFlockpickingBook" />
+      <item name="DFquickerCraftingBook" />
+    </trader_item_group>
+    <trader_item_group name="skillMagazinesTraderHugh">
+      <!--Element inserted by: "DarknessFallsCore"-->
+      <item name="meleeToolSalvageT1WrenchSchematic" />
+      <item name="meleeWpnBladeT1HuntingKnifeSchematic" />
+      <item name="meleeWpnSledgeT1IronSledgehammerSchematic" />
+      <item name="meleeToolSalvageT2RatchetSchematic" />
+      <item name="meleeToolSalvageT3ImpactDriverSchematic" />
+      <item name="meleeToolPickT3AugerSchematic" />
+      <item name="meleeToolAxeT3ChainsawSchematic" />
+      <item name="meleeToolRepairT3NailgunSchematic" />
+      <item name="DFforgeAhead" />
+      <item name="workbenchSchematic" />
+      <item name="cementMixerSchematic" />
+      <item name="chemistryStationSchematic" />
+    </trader_item_group>
+    <trader_item_group name="skillMagazinesTraderJoel">
+      <!--Element inserted by: "DarknessFallsCore"-->
+      <item name="gunBowT1WoodenBowSchematic" />
+      <item name="gunHandgunT1PistolSchematic" />
+      <item name="gunShotgunT1DoubleBarrelSchematic" />
+      <item name="gunMGT1AK47Schematic" />
+      <item name="gunRifleT1HuntingRifleSchematic" />
+      <item name="gunBowT1IronCrossbowSchematic" />
+      <item name="gunHandgunT2Magnum44Schematic" />
+      <item name="DFgunP225Schematic" />
+      <item name="gunShotgunT2PumpShotgunSchematic" />
+      <item name="gunMGT2TacticalARSchematic" />
+      <item name="gunRifleT2LeverActionRifleSchematic" />
+      <item name="gunBowT3CompoundBowSchematic" />
+      <item name="gunBowT3CompoundCrossbowSchematic" />
+      <item name="gunHandgunT3DesertVultureSchematic" />
+      <item name="gunHandgunT3SMG5Schematic" />
+      <item name="gunShotgunT1DoubleBarrelSchematic" />
+      <item name="gunShotgunT3AutoShotgunSchematic" />
+      <item name="gunRifleT3SniperRifleSchematic" />
+      <item name="DFgunWinchesterRifleSchematic" />
+      <item name="meleeWpnClubT1BaseballBatSchematic" />
+      <item name="meleeWpnKnucklesT1IronKnucklesSchematic" />
+      <item name="meleeWpnBladeT1HuntingKnifeSchematic" />
+      <item name="meleeWpnSledgeT1IronSledgehammerSchematic" />
+      <item name="meleeWpnClubT3SteelClubSchematic" />
+      <item name="meleeWpnSpearT1IronSpearSchematic" />
+      <item name="meleeWpnKnucklesT3SteelKnucklesSchematic" />
+      <item name="meleeWpnSledgeT3SteelSledgehammerSchematic" />
+      <item name="meleeWpnBladeT3MacheteSchematic" />
+      <item name="meleeWpnSpearT3SteelSpearSchematic" />
+      <item name="meleeToolSalvageT1WrenchSchematic" />
+      <item name="meleeWpnBladeT1HuntingKnifeSchematic" />
+      <item name="meleeWpnSledgeT1IronSledgehammerSchematic" />
+    </trader_item_group>
+    <trader_item_group name="skillMagazinesTraderJen">
+      <!--Element inserted by: "DarknessFallsCore"-->
+      <!-- this needs adjustment, adding a random book for now
+			<item name="armorLeatherSetSchematic"/>
+			<item name="armorIronSetSchematic"/>
+			<item name="armorSteelSetSchematic"/>
+			<item name="armorMilitarySetSchematic"/>
+		-->
+      <item name="DFquickerCraftingBook" />
+    </trader_item_group>
+    <trader_item_group name="skillMagazinesTraderRekt">
+      <!--Element inserted by: "DarknessFallsCore"-->
+      <item name="plantedAloe1Schematic" />
+      <item name="plantedBlueberry1Schematic" />
+      <item name="plantedChrysanthemum1Schematic" />
+      <item name="plantedCotton1Schematic" />
+      <item name="DFseedWheatSchematic" />
+      <item name="DFseedOrangeSchematic" />
+      <item name="plantedCorn1Schematic" />
+      <item name="plantedMushroom1Schematic" />
+      <item name="DFseedCarrotSchematic" />
+      <item name="DFseedCannabisSchematic" />
+      <item name="DFseedBananaSchematic" />
+      <item name="plantedCoffee1Schematic" />
+      <item name="drinkJarRedTeaSchematic" />
+      <item name="drinkJarGoldenRodTeaSchematic" />
+      <item name="DFappleJuiceSchematic" />
+      <item name="DForangeJuiceSchematic" />
+      <item name="DFdrinkRiceMilkSchematic" />
+      <item name="foodMeatStewSchematic" />
+      <item name="foodVegetableStewSchematic" />
+      <item name="foodBlueberryPieSchematic" />
+      <item name="foodSteakAndPotatoSchematic" />
+      <item name="DFvegetableSoupSchematic" />
+      <item name="DFapplePieSchematic" />
+      <item name="DForangeMarmaladeSchematic" />
+      <item name="foodJarBlueberryJamSchematic" />
+      <item name="DFRicePuddingSchematic" />
+      <item name="DFChesseSchematic" />
+      <item name="drinkYuccaJuiceSmoothieSchematic" />
+      <item name="DFtomatoJuiceSchematic" />
+      <item name="DForangeTeaSchematic" />
+      <item name="DFblueberryPancakesSchematic" />
+      <item name="DFbananaPancakesSchematic" />
+      <item name="DFmarmaladeToastSchematic" />
+      <item name="DFCheesePizzaSchematic" />
+      <item name="DFFarmingBook" />
+    </trader_item_group>
+    <!-- Test group used to verify trader resets -->
+    <!--Element removed by: "DarknessFallsCore" (XPath: "/traders/trader_item_groups/trader_item_group[@name='traderTest']")-->
+  </trader_item_groups>
+  <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+  <!-- *** TRADER JOEL ID:1 SPECIALTY: CLOTHES AND ARMOR -->
+  <!--Element removed by: "DarknessFallsCore" (XPath: "/traders/trader_info[@id='1']")-->
+  <!-- *** TRADER BOB ID:6 SPECIALTY: TOOLS AND VEHICLES -->
+  <!--Element removed by: "DarknessFallsCore" (XPath: "/traders/trader_info[@id='6']")-->
+  <!-- *** TRADER JEN ID:2 SPECIALTY: MEDICAL AND BOOKS -->
+  <!--Element removed by: "DarknessFallsCore" (XPath: "/traders/trader_info[@id='2']")-->
+  <!-- *** TRADER HUGH ID:7 SPECIALTY: GUNS & AMMO -->
+  <!--Element removed by: "DarknessFallsCore" (XPath: "/traders/trader_info[@id='7']")-->
+  <!-- *** TRADER REKT ID:8 SPECIALTY: FOOD & FARMING -->
+  <!--Element removed by: "DarknessFallsCore" (XPath: "/traders/trader_info[@id='8']")-->
+  <!-- *** PLAYER OWNED VENDING MACHINES ID:3-->
+  <trader_info id="3" reset_interval="-1" override_buy_markup="1.0" override_sell_markup="1.0" allow_sell="false" player_owned="true" />
+  <!-- *** POI DRINK VENDING MACHINES ID:4 -->
+  <!--Element removed by: "DarknessFallsCore" (XPath: "/traders/trader_info[@id='4']")-->
+  <!-- *** POI FOOD/CANDY VENDING MACHINES ID:10 -->
+  <!--Element removed by: "DarknessFallsCore" (XPath: "/traders/trader_info[@id='10']")-->
+  <!-- *** RENTED VENDING MACHINES ID:5 -->
+  <trader_info id="5" reset_interval="-1" override_buy_markup="1.0" override_sell_markup="1.0" allow_sell="false" rentable="true" rent_cost="2500" rent_time="30" />
+  <!-- *** PLAY_TEST_TRADER ID:9 -->
+  <!--Element removed by: "DarknessFallsCore" (XPath: "/traders/trader_info[@id='9']")-->
+  <trader_info id="1" reset_interval="3" MinRestockCurrency="50000">
+    <!--Attribute "MinRestockCurrency" added/overwritten by: "IDCTraderOverhaul"-->
+    <!--Element appended by: "DarknessFallsCore"-->
+    <!-- *** Specialty -->
+    <trader_items>
+      <!--
+				<item group="clothes" unique_only="true" count="3,6"/> -->
+      <item group="groupArmorMods" unique_only="true" count="4,6" />
+      <item group="groupArmorT0Light" unique_only="true" count="3" />
+      <item group="groupArmorT1Light" unique_only="true" count="3" />
+      <item group="groupArmorT2Light" unique_only="true" count="3" />
+      <item group="groupArmorT0Heavy" unique_only="true" count="3" />
+      <item group="groupArmorT1Heavy" unique_only="true" count="3" />
+      <item group="groupArmorT2Heavy" unique_only="true" count="3" />
+      <item name="resourceMilitaryFiber" count="5,20" />
+      <item group="skillMagazinesTraderJoel" unique_only="true" count="2,3" />
+      <item group="skillMagazines" unique_only="true" count="2,4" />
+      <item group="books" unique_only="true" count="2,3" />
+      <item group="tools" unique_only="true" count="4" />
+      <item name="resourceWaterFilter" count="3,5" />
+      <item name="toolCookingPot" count="1,3" />
+      <item name="toolCookingGrill" count="1,3" />
+      <item name="DFLathe" unique_only="true" count="1" prob="0.3" />
+      <item group="workstationToolsJoel" unique_only="true" count="1,2" />
+      <item group="workstationToolsGeneric" unique_only="true" count="1,2" />
+    </trader_items>
+    <!-- *** General -->
+    <trader_items count="all">
+      <item group="traderAlways" />
+      <item group="traderGeneral" count="2,4" />
+      <item group="traderResources" count="7,10" />
+      <item group="tools" unique_only="true" count="1,2" />
+      <item group="groupMeleeAll" count="3,5" />
+      <item group="groupRangedAll" count="3,5" />
+      <item group="weaponsGunParts" count="2,4" />
+      <item group="traderElectrical" unique_only="true" count="5,10" />
+      <item group="constructionSupplies" count="2,4" />
+      <item group="decorativeBlocks" unique_only="true" count="6,10" />
+    </trader_items>
+    <trader_items>
+      <!--Element appended by: "IDCAdvancedDewCollector"-->
+      <item name="adcAdvancedFilter" count="1,1" />
+      <item name="adcMineralInfuser" count="1,1" />
+    </trader_items>
+  </trader_info>
+  <trader_info id="6" reset_interval="3" MinRestockCurrency="50000">
+    <!--Attribute "MinRestockCurrency" added/overwritten by: "IDCTraderOverhaul"-->
+    <!--Element appended by: "DarknessFallsCore"-->
+    <!-- *** Specialty -->
+    <trader_items count="all">
+      <item group="groupVehicles" unique_only="true" count="2" />
+      <item group="groupMeleeMods" unique_only="true" count="1,2" />
+      <item group="tools" unique_only="true" count="4" />
+      <item group="rareTools" unique_only="true" count="1,3" />
+      <item group="traderElectrical" unique_only="true" count="8,15" />
+      <item group="skillMagazinesTraderBob" unique_only="true" count="2,3" />
+      <item group="books" unique_only="true" count="2,3" />
+      <item name="resourceWaterFilter" count="3,5" />
+      <item name="toolCookingPot" count="1,3" />
+      <item name="toolCookingGrill" count="1,3" />
+      <item group="workstationToolsBob" unique_only="true" count="1,2" />
+      <item group="workstationToolsGeneric" unique_only="true" count="1,2" />
+      <item name="vehicleMD500placeable" count="1" unique_only="true" />
+    </trader_items>
+    <!-- *** General -->
+    <trader_items count="all">
+      <item group="traderAlways" />
+      <item group="traderGeneral" count="2,4" />
+      <item group="traderResources" count="7,10" />
+      <item group="groupModsAll" unique_only="true" count="2,5" />
+      <item group="tools" unique_only="true" count="1,4" />
+      <item group="traderElectrical" unique_only="true" count="2,5" />
+      <item group="groupMeleeAll" count="3,5" />
+      <item group="groupRangedAll" count="3,5" />
+      <item group="weaponsGunParts" count="2,4" />
+      <item name="resourceMilitaryFiber" count="1,2" />
+      <!--
+				<item group="clothes" count="1,4"/> -->
+      <item group="groupArmorAllLight" count="1,2" />
+      <item group="groupArmorAllHeavy" count="1,2" />
+      <item group="constructionSupplies" count="2,4" />
+      <item group="decorativeBlocks" unique_only="true" count="6,10" />
+    </trader_items>
+  </trader_info>
+  <trader_info id="2" reset_interval="3" MinRestockCurrency="50000">
+    <!--Attribute "MinRestockCurrency" added/overwritten by: "IDCTraderOverhaul"-->
+    <!--Element appended by: "DarknessFallsCore"-->
+    <!-- *** Specialty -->
+    <trader_items count="all">
+      <item name="resourceCropAloeLeaf" count="2,5" />
+      <item name="medicalAloeCream" count="2,5" />
+      <item group="medicine" unique_only="true" count="4,6" />
+      <item group="rareMedicine" count="2,4" />
+      <item group="skillMagazinesTraderJen" unique_only="true" count="4,6" />
+      <item group="skillMagazines" unique_only="true" count="2,4" />
+      <item group="commonBooks" unique_only="true" count="1,2" />
+      <item group="rareBooks" count="1" />
+      <item group="perkBooks" count="1" />
+      <item group="tools" unique_only="true" count="4" />
+      <item name="resourceWaterFilter" count="3,5" />
+      <item name="toolCookingPot" count="1,3" />
+      <item name="toolCookingGrill" count="1,3" />
+      <item group="workstationToolsJen" unique_only="true" count="1,2" />
+      <item group="workstationToolsGeneric" unique_only="true" count="1,2" />
+      <item name="vehicleMD500placeable" count="1" unique_only="true" />
+    </trader_items>
+    <!-- *** General -->
+    <trader_items count="all">
+      <item group="traderAlways" />
+      <item group="traderGeneral" count="2,4" />
+      <item group="traderResources" count="7,10" />
+      <item group="groupModsAll" unique_only="true" count="2,5" />
+      <item group="tools" unique_only="true" count="1,2" />
+      <item group="groupMeleeAll" count="3,5" />
+      <item group="groupRangedAll" count="3,5" />
+      <item group="weaponsGunParts" count="2,4" />
+      <item name="resourceMilitaryFiber" count="1,2" />
+      <item group="traderElectrical" unique_only="true" count="5,10" />
+      <!--
+				<item group="clothes" count="1,4"/> -->
+      <item group="groupArmorAllLight" count="1,2" />
+      <item group="groupArmorAllHeavy" count="1,2" />
+      <item group="constructionSupplies" count="2,4" />
+      <item group="decorativeBlocks" unique_only="true" count="6,10" />
+    </trader_items>
+    <trader_items>
+      <!--Element appended by: "IDCAdvancedDewCollector"-->
+      <item name="adcAdvancedFilter" count="1,1" />
+      <item name="adcMineralInfuser" count="1,1" />
+    </trader_items>
+  </trader_info>
+  <trader_info id="7" reset_interval="3" MinRestockCurrency="50000">
+    <!--Attribute "MinRestockCurrency" added/overwritten by: "IDCTraderOverhaul"-->
+    <!--Element appended by: "DarknessFallsCore"-->
+    <!-- *** Specialty -->
+    <trader_items count="all">
+      <item group="groupAllAmmo" unique_only="true" count="2,4" />
+      <item group="ammoSupplies" count="2,3" />
+      <item group="groupRangedAll" unique_only="true" count="3,5" />
+      <item group="groupMeleeAll" unique_only="true" count="3,5" />
+      <item group="weaponsGunParts" unique_only="true" count="2,4" />
+      <item group="groupRangedMods" count="1,2" />
+      <item group="tools" unique_only="true" count="4" />
+      <item group="skillMagazinesTraderHugh" unique_only="true" count="2,3" />
+      <item group="books" unique_only="true" count="2,3" />
+      <item name="resourceWaterFilter" count="3,5" />
+      <item name="toolCookingPot" count="1,3" />
+      <item name="toolCookingGrill" count="1,3" />
+      <item group="workstationToolsHugh" unique_only="true" count="1,2" />
+      <item group="workstationToolsGeneric" unique_only="true" count="1,2" />
+      <item name="vehicleDusterplaceable" count="1" unique_only="true" />
+    </trader_items>
+    <!-- *** General -->
+    <trader_items count="all">
+      <item group="traderAlways" />
+      <item group="traderGeneral" count="2,4" />
+      <item group="traderResources" count="7,10" />
+      <item group="groupModsAll" unique_only="true" count="2,5" />
+      <item group="groupMeleeAll" count="1,2" />
+      <item group="groupRangedAll" count="1,2" />
+      <item group="weaponsGunParts" count="2,4" />
+      <item name="resourceMilitaryFiber" count="1,2" />
+      <item group="tools" unique_only="true" count="1,2" />
+      <item group="traderElectrical" unique_only="true" count="5,10" />
+      <!--
+				<item group="clothes" count="1,4"/> -->
+      <item group="groupArmorAllLight" count="1,2" />
+      <item group="groupArmorAllHeavy" count="1,2" />
+      <item group="constructionSupplies" count="2,4" />
+      <item group="decorativeBlocks" unique_only="true" count="6,10" />
+    </trader_items>
+    <trader_items>
+      <!--Element appended by: "IDCAdvancedDewCollector"-->
+      <item name="adcAdvancedFilter" count="1,1" />
+      <item name="adcMineralInfuser" count="1,1" />
+    </trader_items>
+  </trader_info>
+  <trader_info id="8" reset_interval="3" MinRestockCurrency="50000">
+    <!--Attribute "MinRestockCurrency" added/overwritten by: "IDCTraderOverhaul"-->
+    <!--Element appended by: "DarknessFallsCore"-->
+    <!-- *** Specialty -->
+    <trader_items count="all">
+      <item group="seeds" unique_only="true" count="2,5" />
+      <item group="cannedfood" count="3,6" />
+      <item group="foodSupplies" count="2,5" />
+      <item group="groupFoodAll" count="1,3" />
+      <item group="tools" unique_only="true" count="4" />
+      <item group="skillMagazinesTraderRekt" unique_only="true" count="2,3" />
+      <item group="skillMagazines" unique_only="true" count="2,4" />
+      <item group="books" unique_only="true" count="2,3" />
+      <item name="resourceWaterFilter" count="3,5" />
+      <item name="toolCookingPot" count="1,3" />
+      <item name="toolCookingGrill" count="1,3" />
+      <item group="workstationToolsRekt" unique_only="true" count="1,2" />
+      <item group="workstationToolsGeneric" unique_only="true" count="1,2" />
+      <item name="vehicleDusterplaceable" count="1" unique_only="true" />
+    </trader_items>
+    <!-- *** General -->
+    <trader_items count="all">
+      <item group="traderAlways" />
+      <item group="traderGeneral" count="2,4" />
+      <item group="traderResources" count="7,10" />
+      <item group="groupModsAll" unique_only="true" count="2,5" />
+      <item group="tools" unique_only="true" count="1,2" />
+      <item group="groupMeleeAll" count="3,5" />
+      <item group="groupRangedAll" count="3,5" />
+      <item group="weaponsGunParts" count="2,4" />
+      <item name="resourceMilitaryFiber" count="1,2" />
+      <item group="traderElectrical" unique_only="true" count="5,10" />
+      <!--
+				<item group="clothes" count="1,4"/> -->
+      <item group="groupArmorAllLight" count="1,2" />
+      <item group="groupArmorAllHeavy" count="1,2" />
+      <item group="constructionSupplies" count="2,4" />
+      <item group="decorativeBlocks" unique_only="true" count="6,10" />
+    </trader_items>
+  </trader_info>
+  <trader_info id="9" reset_interval="3">
+    <!--Element appended by: "DarknessFallsCore"-->
+    <!-- *** Specialty -->
+    <trader_items>
+      <!--
+				<item group="clothes" unique_only="true" count="3,6"/> -->
+      <item group="groupArmorMods" unique_only="true" count="4,6" />
+      <item group="groupArmorT0Light" unique_only="true" count="3" />
+      <item group="groupArmorT1Light" unique_only="true" count="3" />
+      <item group="groupArmorT2Light" unique_only="true" count="3" />
+      <item group="groupArmorT0Heavy" unique_only="true" count="3" />
+      <item group="groupArmorT1Heavy" unique_only="true" count="3" />
+      <item group="groupArmorT2Heavy" unique_only="true" count="3" />
+      <item name="resourceMilitaryFiber" count="5,20" />
+      <item group="skillMagazinesTraderJoel" unique_only="true" count="2,3" />
+      <item group="skillMagazines" unique_only="true" count="2,4" />
+      <item group="books" unique_only="true" count="2,3" />
+      <item group="tools" unique_only="true" count="4" />
+      <item name="resourceWaterFilter" count="3,5" />
+      <item name="toolCookingPot" count="1,3" />
+      <item name="toolCookingGrill" count="1,3" />
+      <item name="DFLathe" unique_only="true" count="1" prob="0.3" />
+      <item group="workstationToolsJoel" unique_only="true" count="1,2" />
+      <item group="workstationToolsGeneric" unique_only="true" count="1,2" />
+    </trader_items>
+    <!-- *** General -->
+    <trader_items count="all">
+      <item group="traderAlways" />
+      <item group="traderGeneral" count="2,4" />
+      <item group="traderResources" count="7,10" />
+      <item group="tools" unique_only="true" count="1,2" />
+      <item group="groupMeleeAll" count="3,5" />
+      <item group="groupRangedAll" count="3,5" />
+      <item group="weaponsGunParts" count="2,4" />
+      <item group="traderElectrical" unique_only="true" count="5,10" />
+      <item group="constructionSupplies" count="2,4" />
+      <item group="decorativeBlocks" unique_only="true" count="6,10" />
+    </trader_items>
+  </trader_info>
+  <trader_info id="11" reset_interval="3" MinRestockCurrency="50000">
+    <!--Attribute "MinRestockCurrency" added/overwritten by: "IDCTraderOverhaul"-->
+    <!--Element appended by: "DarknessFallsCore"-->
+    <trader_items>
+      <item group="groupArmorMods" unique_only="true" count="4,6" />
+      <item group="groupArmorT0Light" unique_only="true" count="3" />
+      <item group="groupArmorT1Light" unique_only="true" count="3" />
+      <item group="groupArmorT2Light" unique_only="true" count="3" />
+      <item group="groupArmorT0Heavy" unique_only="true" count="3" />
+      <item group="groupArmorT1Heavy" unique_only="true" count="3" />
+      <item group="groupArmorT2Heavy" unique_only="true" count="3" />
+      <item group="rareTools" unique_only="true" count="1,3" />
+      <item group="traderElectrical" unique_only="true" count="8,15" />
+      <item group="books" unique_only="true" count="2,3" />
+      <item group="tools" unique_only="true" count="4" />
+      <item name="resourceWaterFilter" count="3,5" />
+      <item group="groupAllAmmo" unique_only="true" count="2,4" />
+      <item group="ammoSupplies" count="2,3" />
+      <item name="DFPortalPowerSource" count="1" prob="0.1" />
+      <item group="workstationToolsRekt" unique_only="true" count="1,2" />
+      <item group="workstationToolsJoel" unique_only="true" count="1,2" />
+      <item group="workstationToolsJen" unique_only="true" count="1,2" />
+      <item group="workstationToolsHugh" unique_only="true" count="1,2" />
+      <item group="workstationToolsBob" unique_only="true" count="1,2" />
+      <item group="workstationToolsGeneric" count="1,2" />
+      <item name="vehicleUH60placeable" count="1" unique_only="true" />
+      <item name="solarCell" unique_only="true" count="2,6" />
+    </trader_items>
+    <trader_items count="all">
+      <item group="traderAlways" />
+      <item group="traderGeneral" count="4,8" />
+      <item group="generalResources" count="5,8" />
+      <item group="groupModsAll" unique_only="true" count="2,5" />
+      <item group="groupMeleeAll" count="3,5" />
+      <item group="groupRangedAll" count="3,5" />
+      <item name="resourceMilitaryFiber" count="1,2" />
+      <item group="bookscaitlin" count="1,2" />
+      <item group="rareconstructionSupplies" count="1,2" />
+      <item group="constructionSupplies" count="2,4" />
+      <item group="caitlinResources" unique_only="true" count="6,10" />
+    </trader_items>
+  </trader_info>
+  <trader_info id="12" reset_interval="3" override_buy_markup="2" allow_sell="false" MinRestockCurrency="50000">
+    <!--Attribute "MinRestockCurrency" added/overwritten by: "IDCTraderOverhaul"-->
+    <!--Element appended by: "DarknessFallsCore"-->
+    <trader_items>
+      <item group="GCmedicine" count="20,40" />
+    </trader_items>
+  </trader_info>
+  <trader_info id="13" reset_interval="3" allow_sell="false" MinRestockCurrency="50000">
+    <!--Attribute "MinRestockCurrency" added/overwritten by: "IDCTraderOverhaul"-->
+    <!--Element appended by: "DarknessFallsCore"-->
+    <trader_items count="all">
+      <item group="seeds" unique_only="true" count="2,5" />
+      <item group="cannedfood" count="3,6" />
+      <item group="foodSupplies" count="2,5" />
+      <item group="groupFoodAll" count="1,3" />
+      <item group="tools" unique_only="true" count="4" />
+      <item group="skillMagazinesTraderRekt" unique_only="true" count="2,3" />
+      <item group="skillMagazines" unique_only="true" count="2,4" />
+      <item group="books" unique_only="true" count="2,3" />
+      <item name="resourceWaterFilter" count="3,5" />
+    </trader_items>
+    <!-- *** General -->
+    <trader_items count="all">
+      <item group="traderAlways" />
+      <item group="traderGeneral" count="2,4" />
+      <item group="traderResources" count="7,10" />
+      <item group="traderElectrical" unique_only="true" count="5,10" />
+      <!--
+				<item group="clothes" count="1,4"/> -->
+      <item group="groupArmorAllLight" count="1,2" />
+      <item group="groupArmorAllHeavy" count="1,2" />
+      <item group="constructionSupplies" count="8,12" />
+    </trader_items>
+  </trader_info>
+  <trader_info id="14" reset_interval="3" allow_sell="false" MinRestockCurrency="50000">
+    <!--Attribute "MinRestockCurrency" added/overwritten by: "IDCTraderOverhaul"-->
+    <!--Element appended by: "DarknessFallsCore"-->
+    <!-- *** Specialty -->
+    <trader_items count="all">
+      <item group="groupAllAmmo" unique_only="true" count="2,4" />
+      <item group="ammoSupplies" count="2,3" />
+      <item group="groupRangedAll" unique_only="true" count="3,5" />
+      <item group="groupMeleeAll" unique_only="true" count="3,5" />
+      <item group="weaponsGunParts" unique_only="true" count="2,4" />
+      <item group="groupRangedMods" count="1,2" />
+      <item group="tools" unique_only="true" count="4" />
+      <item group="skillMagazinesTraderHugh" unique_only="true" count="2,3" />
+      <item group="books" unique_only="true" count="2,3" />
+      <item name="resourceWaterFilter" count="3,5" />
+      <item name="DFLathe" unique_only="true" count="1" prob="0.3" />
+    </trader_items>
+    <!-- *** General -->
+    <trader_items count="all">
+      <item group="traderAlways" />
+      <item group="traderGeneral" count="2,4" />
+      <item group="traderResources" count="7,10" />
+      <item name="resourceMilitaryFiber" count="1,2" />
+    </trader_items>
+  </trader_info>
+  <trader_info id="15" reset_interval="3" allow_sell="false" MinRestockCurrency="50000">
+    <!--Attribute "MinRestockCurrency" added/overwritten by: "IDCTraderOverhaul"-->
+    <!--Element appended by: "DarknessFallsCore"-->
+    <!-- *** Specialty -->
+    <trader_items count="all">
+      <item name="resourceCropAloeLeaf" count="2,5" />
+      <item name="medicalAloeCream" count="2,5" />
+      <item group="medicine" unique_only="true" count="4,6" />
+      <item group="rareMedicine" count="2,4" />
+      <item group="skillMagazinesTraderJen" unique_only="true" count="4,6" />
+      <item group="skillMagazines" unique_only="true" count="2,4" />
+      <item group="commonBooks" unique_only="true" count="1,2" />
+      <item group="rareBooks" count="1" />
+      <item group="perkBooks" count="1" />
+      <item group="tools" unique_only="true" count="4" />
+      <item name="resourceWaterFilter" count="3,5" />
+    </trader_items>
+    <!-- *** General -->
+    <trader_items count="all">
+      <item group="traderAlways" />
+      <item group="traderGeneral" count="2,4" />
+      <item group="traderResources" count="7,10" />
+      <item name="DFresourceHazmatFiber" count="1,2" />
+    </trader_items>
+  </trader_info>
+  <trader_info id="4" reset_interval="1" override_buy_markup="1" allow_sell="false" currency_item="oldCash">
+    <!--Element appended by: "DarknessFallsCore"-->
+    <trader_items>
+      <item group="drinkVending" count="4,8" />
+    </trader_items>
+  </trader_info>
+  <trader_info id="10" reset_interval="1" override_buy_markup="1" allow_sell="false" currency_item="oldCash">
+    <!--Element appended by: "DarknessFallsCore"-->
+    <trader_items>
+      <item group="foodVending" count="4,8" />
+    </trader_items>
+  </trader_info>
+</traders>
