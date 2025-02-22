@@ -1,9 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <persistentplayerdata>
-  <player platform="EOS" userid="000244d5251b4fafb0dbdee385a5b927" nativeplatform="Steam" nativeuserid="76561199032528645" playername="ほんだのばいぶ" playgroup="Standalone" lastlogin="2025-02-21 19:23:58" position="-633,63,493">
+  <player platform="EOS" userid="000244d5251b4fafb0dbdee385a5b927" nativeplatform="Steam" nativeuserid="76561199032528645" playername="ほんだのばいぶ" playgroup="Standalone" lastlogin="2025-02-22 09:38:45" position="-536,62,483">
     <acl platform="EOS" userid="0002dc8b2ee844aea61ef92aa927c6f6" />
     <acl platform="EOS" userid="0002a747d29c4b47b17945a6a6d1361f" />
     <acl platform="EOS" userid="00025d3a33b347d5b9f21e5d26329f58" />
+    <lpblock pos="-630,63,497" />
+    <lpblock pos="-563,63,433" />
     <questpositions>
       <position id="-2013712158" positiondatatype="4" pos="-1592,57,1381" />
       <position id="-81651727" positiondatatype="4" pos="-2626,176,1204" />
@@ -15,6 +17,14 @@
       <position id="158621488" positiondatatype="0" pos="-546,62,493" />
       <position id="158621488" positiondatatype="1" pos="-204,54,796" />
       <position id="54298605" positiondatatype="4" pos="-747,76,1604" />
+      <position id="-2013113339" positiondatatype="4" pos="-714,57,-603" />
+      <position id="771851521" positiondatatype="4" pos="104,54,-532" />
+      <position id="693737740" positiondatatype="4" pos="176,57,902" />
+      <position id="-1022915954" positiondatatype="4" pos="-1259,72,902" />
+      <position id="-1662322553" positiondatatype="4" pos="-773,61,-34" />
+      <position id="1607096179" positiondatatype="4" pos="-872,57,-386" />
+      <position id="2006390208" positiondatatype="4" pos="-1302,57,774" />
+      <position id="-1523406143" positiondatatype="4" pos="-135,57,-269" />
     </questpositions>
     <vendingmachinepositions>
       <position pos="-629,63,493" />
@@ -38,13 +48,11 @@
       <position id="1020917100" positiondatatype="7" pos="-849,61,808" />
     </questpositions>
   </player>
-  <player platform="EOS" userid="00025d3a33b347d5b9f21e5d26329f58" nativeplatform="Steam" nativeuserid="76561199195070505" playername="anananan" playgroup="Standalone" lastlogin="2025-02-21 19:23:58" position="-630,63,494">
+  <player platform="EOS" userid="00025d3a33b347d5b9f21e5d26329f58" nativeplatform="Steam" nativeuserid="76561199195070505" playername="anananan" playgroup="Standalone" lastlogin="2025-02-22 09:41:58" position="-632,63,490">
     <acl platform="EOS" userid="000244d5251b4fafb0dbdee385a5b927" />
     <acl platform="EOS" userid="0002dc8b2ee844aea61ef92aa927c6f6" />
     <questpositions>
       <position id="1703008546" positiondatatype="4" pos="967,45,-696" />
-      <position id="158621488" positiondatatype="1" pos="-204,54,796" />
-      <position id="158621488" positiondatatype="0" pos="-546,62,493" />
     </questpositions>
   </player>
 </persistentplayerdata>
